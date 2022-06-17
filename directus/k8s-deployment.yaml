@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: directus
+  labels:
+    app: node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node
+  template:
+    metadata:
+      labels:
+        app: node
+    spec:
+      containers:
+        - name: node
+          image: zrh.ocir.io/<DOCKER_OBJECT_STORAGE_NAMESPACE>/directus:latest
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+      - name: free-registry-secret
